@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi 3er Semestre</title>
+<style>
+:root{
+  --bg-image: url('descarga.jpg');
+  --dark:#0d0d1a; --blue:#273a65; --purple:#6e5a8c; --bone:#e8dfc8; --pale:#a9c3d6;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Georgia,serif;background:var(--dark) var(--bg-image) fixed center/cover;color:var(--bone);min-height:100vh; padding-bottom:50px;}
+body::before{content:'';position:fixed;inset:0;background:rgba(13,13,26,0.88);z-index:-1}
+.header{text-align:center;padding:25px 10px;border-bottom:2px solid var(--pale)}
+.header h1{font-size:2.5rem;letter-spacing:3px;color:var(--pale)}
+.view{display:none;animation:fade .5s} .view.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.center{max-width:900px;margin:30px auto;padding:0 20px;text-align:center}
+.btn-main{display:block;width:340px;margin:16px auto;padding:16px;background:var(--bone);color:var(--blue);border-radius:30px;font-weight:bold;font-size:1.2rem;border:2px solid var(--pale);cursor:pointer}
+.btn-main:hover{background:var(--blue);color:var(--bone)}
+.btn-back{display:inline-block;margin:20px;padding:8px 18px;background:rgba(232,223,200,0.2);border:1px solid var(--pale);border-radius:20px;color:var(--bone);cursor:pointer}
+.container{display:flex;max-width:1300px;margin:20px auto;gap:20px;padding:0 20px}
+.sidebar{width:320px;min-width:320px;background:rgba(232,223,200,0.92);border-radius:15px;padding:20px;color:#1a1a2e;position:sticky;top:20px;height:fit-content}
+.content{flex:1;background:rgba(232,223,200,0.94);color:#1a1a2e;border-radius:15px;padding:35px;min-height:400px}
+.materia-item{padding:12px 15px;margin:10px 0;background:rgba(39,58,101,0.07);border-left:4px solid var(--purple);border-radius:0 12px 12px 0;cursor:pointer}
+.materia-item:hover{background:rgba(110,90,140,0.15);transform:translateX(5px)}
+.temario h2{color:var(--blue);border-bottom:2px double var(--purple);padding-bottom:8px;margin-bottom:15px}
+.temario li{padding:7px 0 7px 25px;position:relative;list-style:none;border-bottom:1px dotted rgba(0,0,0,0.1)}
+.temario li::before{content:'🦋';position:absolute;left:0}
+@media(max-width:900px){.container{flex-direction:column}.sidebar{width:100%;position:relative}}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>✧ Mi 3er Semestre ✧</h1>
+  <p><i>"Yo nunca tuve un sueño hecho realidad, hasta que tú llegaste" — Emily</i></p>
+  <div>🦴 ── 🦋 ── 💀 ── 🌙 ── 🦴</div>
+</div>
+
+<div id="view-parciales" class="view active">
+  <div class="center">
+    <div style="font-size:4rem">💀🦋👰</div>
+    <h2>Selecciona un Parcial</h2>
+    <button class="btn-main" onclick="openParcial('p1')">🦋 PARCIAL 1</button>
+    <button class="btn-main" onclick="openParcial('p2')">💀 PARCIAL 2</button>
+    <button class="btn-main" onclick="openParcial('p3')">🦴 PARCIAL 3</button>
+  </div>
+</div>
+
+<div id="view-materias" class="view">
+  <div class="center">
+    <button class="btn-back" onclick="showView('view-parciales')">← Volver a Parciales</button>
+    <h1 id="titulo-parcial">Parcial 3</h1>
+    <div id="lista-materias" style="text-align:left;max-width:650px;margin:20px auto"></div>
+  </div>
+</div>
+
+<div id="view-temario" class="view">
+  <div class="container">
+    <div class="sidebar">
+      <button class="btn-back" onclick="backToMaterias()">← Volver</button>
+      <h2 id="sidebar-title">Materias</h2>
+      <div id="sidebar-menu"></div>
+    </div>
+    <div class="content"><div id="contenido-materia"></div></div>
+  </div>
+</div>
+
+<!-- MARQUEE HASTA ABAJO -->
+<marquee behavior="scroll" direction="left" scrollamount="6" style="position:fixed; bottom:0; left:0; width:100%; background:linear-gradient(90deg,#273a65,#6e5a8c); color:#e8dfc8; padding:10px 0; font-family:Georgia,serif; font-weight:bold; letter-spacing:1px; border-top:2px solid #a9c3d6; z-index:9999;">
+  ALIZEE - ANGELES - KIMBERLY✧ 💀🦋👰🌙🦴 ✧
+</marquee>
+
+<script>
+const datos = {
+  p1: { titulo: "Parcial 1", materias: [
+    {id:'p1-lengua', nombre:'Lengua y Comunicación III', icon:'📜', html:`<div class="temario"><h2>📜 Lengua y Comunicación III</h2><ul><li>Descripción cultural</li><li>Textos narrativos</li><li>Textos expositivos</li><li>Argumentación</li></ul></div>`},
+    {id:'p1-mate', nombre:'Matemáticas', icon:'🦴', html:`<div class="temario"><h2>🦴 Pensamiento Matemático III</h2><ul><li>Ecuaciones lineales</li><li>Sistemas</li><li>Funciones</li><li>Función cuadrática</li></ul></div>`},
+    {id:'p1-filo', nombre:'Filosofía', icon:'💀', html:`<div class="temario"><h2>💀 Pensamiento Filosófico II</h2><ul><li>Filosofar</li><li>Lógica</li><li>Ética</li><li>Estética</li></ul></div>`},
+    {id:'p1-naturales', nombre:'Ciencias Naturales', icon:'🌙', html:`<div class="temario"><h2>🌙 Ciencias Naturales III</h2><ul><li>Materia y energía</li><li>Reacciones</li><li>Electricidad</li><li>Genética</li></ul></div>`},
+    {id:'p1-ingles', nombre:'Inglés', icon:'🇬🇧', html:`<div class="temario"><h2>🇬🇧 Inglés III</h2><ul><li>What we are</li><li>Where we are</li><li>What we share</li><li>Present Tenses</li></ul></div>`},
+    {id:'p1-sub1', nombre:'Submódulo 1 - Emplea Frameworks', icon:'🕸️', html:`<div class="temario"><h2>🕸️ Submódulo 1 - Emplea Frameworks</h2><ul>
+    <li>Encuadre en diagnóstico</li><li>Breve historia de Java y Angular</li><li>Instalación</li><li>TypeScript: introducción</li><li>Variables</li><li>Clases</li><li>Transpilación</li><li>Definición de elementos en una aplicación</li><li>Definición de un componente</li><li>Metadata</li><li>Java y Angular</li><li>Elementos que se pueden crear con Java y Angular</li><li>Comandos básicos de Java y Angular</li><li>Proyecto final</li>
+    </ul></div>`},
+    {id:'p1-sub2', nombre:'Submódulo 2 - Metodologías Ágiles', icon:'🦋', html:`<div class="temario"><h2>🦋 Submódulo 2 - Metodologías Ágiles</h2><ul>
+    <li>Encuadre del curso</li><li>Introducción a las metodologías ágiles</li><li>Concepto</li><li>Ventajas</li><li>Tipos de metodologías ágiles</li><li>Herramientas útiles</li><li>Desarrollo de proyectos de software con metodologías ágiles</li><li>Definición de elementos: objetivos, hoja de ruta, plan de lanzamiento y Sprint</li><li>Establecimiento del proyecto</li><li>Introducción a Python</li><li>Definición</li><li>Sintaxis</li><li>Variables</li><li>Entrada y salida de datos</li><li>Estructuras condicionales en Python</li><li>Definición y sintaxis</li><li>Estructuras de ciclos en Python</li><li>Definición y sintaxis</li>
+    </ul></div>`},
+    {id:'p1-tutoria', nombre:'Tutoría', icon:'🕯️', html:`<div class="temario"><h2>🕯️ Tutorías</h2><ul><li>Proyecto de vida</li><li>Emociones</li><li>Técnicas de estudio</li><li>Prevención</li></ul></div>`},
+    {id:'p1-actividades', nombre:'Actividades Curriculares', icon:'🎨', html:`<div class="temario"><h2>🎨 Actividades Curriculares</h2><ul><li>Deportes</li><li>Arte y cultura</li><li>Club de lectura</li><li>Emprendimiento</li></ul></div>`},
+    {id:'p1-orientacion', nombre:'Orientación', icon:'🧭', html:`<div class="temario"><h2>🧭 Orientación</h2><ul><li>Autoconocimiento</li><li>Toma de decisiones</li><li>Oferta educativa</li><li>Becas</li></ul></div>`}
+  ]},
+  p2: { titulo: "Parcial 2", materias: [
+    {id:'p2-lengua', nombre:'Lengua y Comunicación III', icon:'📜', html:`<div class="temario"><h2>📜 Lengua y Comunicación III</h2><ul><li>Diversidad</li><li>Investigación</li><li>Ensayo cultural</li></ul></div>`},
+    {id:'p2-mate', nombre:'Matemáticas', icon:'🦴', html:`<div class="temario"><h2>🦴 Pensamiento Matemático III</h2><ul><li>Factorización</li><li>Inecuaciones</li><li>Modelado</li></ul></div>`},
+    {id:'p2-filo', nombre:'Filosofía', icon:'💀', html:`<div class="temario"><h2>💀 Pensamiento Filosófico II</h2><ul><li>Política</li><li>Antropología</li><li>Corrientes filosóficas</li></ul></div>`},
+    {id:'p2-naturales', nombre:'Ciencias Naturales', icon:'🌙', html:`<div class="temario"><h2>🌙 Ciencias Naturales III</h2><ul><li>Ecología</li><li>Método científico</li><li>Tecnología</li></ul></div>`},
+    {id:'p2-ingles', nombre:'Inglés', icon:'🇬🇧', html:`<div class="temario"><h2>🇬🇧 Inglés III</h2><ul><li>Past Simple</li><li>Future plans</li><li>Comparative cultures</li></ul></div>`},
+    {id:'p2-sub1', nombre:'Submódulo 1 - Emplea Frameworks', icon:'🕸️', html:`<div class="temario"><h2>🕸️ Submódulo 1 - Emplea Frameworks</h2><ul>
+    <li>Componentes: creación</li><li>Componentes</li><li>Template inline</li><li>Componentes: propiedades</li><li>Componentes: test unitarios</li><li>Decoradores</li><li>Comunicación entre componentes</li><li>Componentes: ciclo de vida (Lifecycle Hook)</li><li>Proyecto final</li>
+    </ul></div>`},
+    {id:'p2-sub2', nombre:'Submódulo 2 - Metodologías Ágiles', icon:'🦋', html:`<div class="temario"><h2>🦋 Submódulo 2 - Metodologías Ágiles</h2><ul>
+    <li>Introducción a Tkinter y Python</li><li>Estructuras</li><li>Elementos</li><li>Modos de ejecución</li><li>Desarrollo de la ventana principal</li><li>Dimensiones</li><li>Título</li><li>Fondo</li><li>Empaquetación</li><li>Gestión de diseño</li><li>Definición</li><li>Sintaxis</li><li>Propiedades del formato de ventana</li><li>Elementos principales: etiquetas, cuadros de texto y botones</li><li>Definición</li><li>Sintaxis</li><li>Aplicación</li><li>Elementos complementarios</li><li>Definición</li><li>Sintaxis</li><li>Aplicación</li>
+    </ul></div>`},
+    {id:'p2-tutoria', nombre:'Tutoría', icon:'🕯️', html:`<div class="temario"><h2>🕯️ Tutorías</h2><ul><li>Orientación vocacional</li><li>Convivencia</li><li>Redes</li></ul></div>`},
+    {id:'p2-actividades', nombre:'Actividades Curriculares', icon:'🎨', html:`<div class="temario"><h2>🎨 Actividades Curriculares</h2><ul><li>Actividades socioemocionales</li><li>Servicio</li><li>Feria</li></ul></div>`},
+    {id:'p2-orientacion', nombre:'Orientación', icon:'🧭', html:`<div class="temario"><h2>🧭 Orientación</h2><ul><li>Mercado laboral</li><li>Plan de vida</li><li>Manejo de estrés</li></ul></div>`}
+  ]},
+  p3: { titulo: "Parcial 3", materias: [
+    {id:'p3-lengua', nombre:'Lengua y Comunicación III', icon:'📜', html:`<div class="temario"><h2>📜 Lengua y Comunicación III - P3</h2><ul><li>Expresión oral</li><li>Proyecto lector</li><li>Antología</li></ul></div>`},
+    {id:'p3-mate', nombre:'Matemáticas', icon:'🦴', html:`<div class="temario"><h2>🦴 Pensamiento Matemático III - P3</h2><ul><li>Progresiones</li><li>Proyecto</li><li>Graficación</li></ul></div>`},
+    {id:'p3-filo', nombre:'Filosofía', icon:'💀', html:`<div class="temario"><h2>💀 Pensamiento Filosófico II - P3</h2><ul><li>Humanidades</li><li>Ensayo</li><li>Debate</li></ul></div>`},
+    {id:'p3-naturales', nombre:'Ciencias Naturales', icon:'🌙', html:`<div class="temario"><h2>🌙 Ciencias Naturales III - P3</h2><ul><li>Laboratorio</li><li>STEM</li><li>Divulgación</li></ul></div>`},
+    {id:'p3-ingles', nombre:'Inglés', icon:'🇬🇧', html:`<div class="temario"><h2>🇬🇧 Inglés III - P3</h2><ul><li>Writing a blog</li><li>Listening & Speaking</li><li>Project</li></ul></div>`},
+    {id:'p3-sub1', nombre:'Submódulo 1 - Emplea Frameworks', icon:'🕸️', html:`<div class="temario"><h2>🕸️ Submódulo 1 - Emplea Frameworks - P3</h2><ul>
+    <li>Directivas: definición</li><li>Directivas ngIf</li><li>Directivas ngFor</li><li>Directivas ngSwitch</li><li>Directivas ngModel</li><li>Directivas ngStyle</li><li>Directivas ngClass</li><li>Proyecto final del semestre</li>
+    </ul></div>`},
+    {id:'p3-sub2', nombre:'Submódulo 2 - Metodologías Ágiles', icon:'🦋', html:`<div class="temario"><h2>🦋 Submódulo 2 - Metodologías Ágiles</h2><ul>
+    <li>Elementos complementarios III</li><li>Definición</li><li>Sintaxis</li><li>Aplicación</li><li>Tipos</li><li>Menús</li><li>Definición</li><li>Sintaxis</li><li>Elementos</li><li>Sonidos</li><li>Definición</li><li>Sintaxis</li><li>Aplicación</li><li>Proyecto final del semestre</li>
+    </ul></div>`},
+    {id:'p3-tutoria', nombre:'Tutoría', icon:'🕯️', html:`<div class="temario"><h2>🕯️ Tutorías - P3</h2><ul><li>Seguimiento</li><li>Mejora</li><li>Cierre</li></ul></div>`},
+    {id:'p3-actividades', nombre:'Actividades Curriculares', icon:'🎨', html:`<div class="temario"><h2>🎨 Actividades Curriculares</h2><ul><li>Concurso</li><li>Habilidades digitales</li><li>Portafolio</li></ul></div>`},
+    {id:'p3-orientacion', nombre:'Orientación', icon:'🧭', html:`<div class="temario"><h2>🧭 Orientación</h2><ul><li>Finanzas</li><li>Currículum vitae (CV)</li><li>Feria vocacional</li></ul></div>`}
+  ]}
+};
+
+let parcialActual = 'p3';
+function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+function openParcial(p){
+  parcialActual=p;
+  document.getElementById('titulo-parcial').innerText=datos[p].titulo;
+  const lista=document.getElementById('lista-materias');lista.innerHTML='';
+  datos[p].materias.forEach(m=>{
+    const div=document.createElement('div');div.className='materia-item';div.innerHTML=`${m.icon} ${m.nombre}`;div.onclick=()=>openMateria(m.id);lista.appendChild(div);
+  });
+  showView('view-materias');
+}
+function openMateria(idMateria){
+  const materia=datos[parcialActual].materias.find(m=>m.id===idMateria);
+  document.getElementById('contenido-materia').innerHTML=materia.html;
+  const menu=document.getElementById('sidebar-menu');menu.innerHTML='';document.getElementById('sidebar-title').innerText=datos[parcialActual].titulo;
+  datos[parcialActual].materias.forEach(m=>{
+    const it=document.createElement('div');it.className='materia-item';if(m.id===idMateria){it.style.background='linear-gradient(90deg,#273a65,#6e5a8c)';it.style.color='#e8dfc8';}
+    it.innerHTML=`${m.icon} ${m.nombre}`;it.onclick=()=>openMateria(m.id);menu.appendChild(it);
+  });
+  showView('view-temario');
+}
+function backToMaterias(){openParcial(parcialActual);}
+</script>
+</body>
+</html>
