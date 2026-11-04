@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>🎃 Datos personales 🎃</title>
+
+
+    <style>
+
+        /* ==========================================
+           🎃 FONDO DE LA PÁGINA
+           
+           CAMBIA "fondo.jpg" POR EL NOMBRE
+           DE TU PROPIA IMAGEN
+           ========================================== */
+
+        body {
+
+            background-image: url("calabazazazona.jpeg");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            font-family: "Trebuchet MS", Arial, sans-serif;
+
+            color: white;
+
+            margin: 0;
+            padding: 0;
+
+        }
+
+
+        /* ==========================================
+           👻 TÍTULO
+           
+           PUEDES CAMBIAR EL COLOR AQUÍ
+           ========================================== */
+
+        .titulo {
+
+            text-align: center;
+
+            color: orange;
+
+            font-size: 45px;
+
+            padding: 25px;
+
+            text-shadow:
+                0 0 5px black,
+                0 0 10px purple,
+                0 0 20px orange;
+
+        }
+
+
+        /* ==========================================
+           🕸️ FORMULARIO
+           ========================================== */
+
+        .contenedor {
+
+            width: 70%;
+
+            max-width: 700px;
+
+            margin: 40px auto;
+
+            padding: 35px;
+
+            background-color: rgba(15, 0, 25, 0.90);
+
+            border: 3px solid orange;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 0 15px orange,
+                0 0 30px purple;
+
+        }
+
+
+        /* ==========================================
+           🎃 SUBTÍTULOS
+           ========================================== */
+
+        h2 {
+
+            text-align: center;
+
+            color: orange;
+
+            border-bottom: 2px solid purple;
+
+            padding-bottom: 10px;
+
+        }
+
+
+        /* ==========================================
+           ✏️ CAMPOS DEL FORMULARIO
+           ========================================== */
+
+        label {
+
+            font-size: 18px;
+
+            color: #eeeeee;
+
+        }
+
+
+        input,
+        select {
+
+            width: 90%;
+
+            padding: 12px;
+
+            margin-top: 8px;
+            margin-bottom: 25px;
+
+            border-radius: 10px;
+
+            border: 2px solid purple;
+
+            background-color: #170c1f;
+
+            color: white;
+
+            font-size: 16px;
+
+        }
+
+
+        /* ==========================================
+           🧙 BOTÓN
+           ========================================== */
+
+        .boton {
+
+            display: block;
+
+            width: 50%;
+
+            margin: 10px auto;
+
+            padding: 14px;
+
+            background-color: #7b1fa2;
+
+            color: white;
+
+            border: 3px solid orange;
+
+            border-radius: 15px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        .boton:hover {
+
+            background-color: orange;
+
+            color: black;
+
+            box-shadow: 0 0 20px orange;
+
+        }
+
+
+        /* ==========================================
+           🦇 MARQUEE DE ABAJO
+           ========================================== */
+
+        .marquee {
+
+            background-color: #18001f;
+
+            color: orange;
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+            padding: 12px;
+
+            border-top: 2px solid orange;
+
+            border-bottom: 2px solid orange;
+
+            margin-top: 40px;
+
+        }
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+         🎃 TÍTULO
+         ========================================== -->
+
+    <h1 class="titulo">
+
+        🎃 DESCUBRE SI ERES ÚNICO 🎃
+
+    </h1>
+
+
+    <!-- ==========================================
+         🕸️ DECORACIÓN
+         ========================================== -->
+
+    <div style="text-align:center; font-size:35px;">
+
+        🕸️ 🦇 👻 🎃 🕷️ 💀 🕷️ 🎃 👻 🦇 🕸️
+
+    </div>
+
+
+
+    <!-- ==========================================
+         📜 FORMULARIO
+         ========================================== -->
+
+    <div class="contenedor">
+
+        <h2>👻 Introduce tus datos 👻</h2>
+
+
+        <form id="formulario">
+
+
+            <!-- NOMBRE COMPLETO -->
+
+            <label for="nombre">
+
+                👤 Nombre completo:
+
+            </label>
+
+            <br>
+
+            <input
+                type="text"
+                id="nombre"
+                placeholder="Escribe tu nombre completo"
+                required
+            >
+
+            <br>
+
+
+            <!-- MES DE NACIMIENTO -->
+
+            <label for="mes">
+
+                🎂 Mes de nacimiento:
+
+            </label>
+
+            <br>
+
+            <select id="mes" required>
+
+                <option value="">Selecciona tu mes</option>
+
+                <option value="enero">Enero</option>
+
+                <option value="febrero">Febrero</option>
+
+                <option value="marzo">Marzo</option>
+
+                <option value="abril">Abril</option>
+
+                <option value="mayo">Mayo</option>
+
+                <option value="junio">Junio</option>
+
+                <option value="julio">Julio</option>
+
+                <option value="agosto">Agosto</option>
+
+                <option value="septiembre">Septiembre</option>
+
+                <option value="octubre">Octubre</option>
+
+                <option value="noviembre">Noviembre</option>
+
+                <option value="diciembre">Diciembre</option>
+
+            </select>
+
+            <br>
+
+
+            <!-- EDAD -->
+
+            <label for="edad">
+
+                🎃 Edad:
+
+            </label>
+
+            <br>
+
+            <input
+                type="number"
+                id="edad"
+                min="1"
+                max="120"
+                placeholder="Escribe tu edad"
+                required
+            >
+
+            <br>
+
+
+            <!-- BOTÓN -->
+
+            <input
+                type="submit"
+                class="boton"
+                value="👻 COMPROBAR 👻"
+            >
+
+
+        </form>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         🦇 MARQUEE DE ABAJO
+         ========================================== -->
+
+    <marquee
+        class="marquee"
+        behavior="scroll"
+        direction="left"
+    >
+
+        🎃HECHO POR ALIZEE, ANGELES Y KIMBERLY   🎃  
+
+    </marquee>
+
+
+
+    <!-- ==========================================
+         💻 JAVASCRIPT
+         
+         AQUÍ SE COMPRUEBAN LOS DATOS
+         ========================================== -->
+
+    <script>
+
+        document.getElementById("formulario").addEventListener("submit", function(event) {
+
+
+            /* Evita que la página se recargue */
+
+            event.preventDefault();
+
+
+            /* Obtener los datos */
+
+            let nombre =
+                document.getElementById("nombre").value;
+
+            let mes =
+                document.getElementById("mes").value;
+
+            let edad =
+                parseInt(document.getElementById("edad").value);
+
+
+
+            /* ==========================================
+               🎃 CONDICIÓN
+
+               MENOR DE 25 AÑOS
+               Y NACIDO EN MAYO
+               ========================================== */
+
+            if (edad < 25 && mes === "mayo") {
+
+
+                alert("🎃 " + nombre +
+                      ", eres único y diferente 👻");
+
+
+            }
+
+
+        });
+
+    </script>
+
+
+</body>
+</html>
